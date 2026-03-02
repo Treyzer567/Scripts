@@ -33,7 +33,7 @@ These scripts watch a source directory and move files into the correct destinati
 
 | Script | Description |
 |--------|-------------|
-| `anime_profile_updater.py` | Automatically updates Sonarr quality profiles for anime series based on `sonarr_map.json`. Runs on a schedule via Docker. Requires `SONARR_URL` and `SONARR_API_KEY` env vars. May require the use of `profile_id.py` to find the profile id's. |
+| `anime_profile_updater.py` | Automatically updates Sonarr quality profiles for anime series based on `sonarr_map.json`. Runs on a schedule via Docker. Requires `SONARR_URL` and `SONARR_API_KEY` env vars. May require the use of `profile_id.py` to find the profile IDs. |
 | `profile_id.py` | One-off utility to list all Sonarr quality profile IDs and names — useful for building `sonarr_map.json` |
 
 ---
@@ -75,4 +75,15 @@ Each mover script requires source and destination paths mounted into the contain
 |------|-------------|
 | [landing-page](https://github.com/Treyzer567/landing-page) | Frontend hub — includes a Script Runner UI for triggering movers manually |
 | [script-runner](https://github.com/Treyzer567/script-runner) | Backend API that the Script Runner UI talks to |
-| [manga-renamer](https://github.com/Treyzer567/manga-renamer) | Manga/Webtoons renaming script/backend |
+| [manga-renamer](https://github.com/Treyzer567/manga-renamer) | Manga/Webtoons renaming script |
+
+---
+
+## External Projects
+
+| Project | Description |
+|---------|-------------|
+| [Sonarr](https://github.com/Sonarr/Sonarr) | TV series collection manager — used for show categorization and quality profiles |
+| [Jellyfin](https://github.com/jellyfin/jellyfin) | Open source media server — destination for moved media |
+| [Booklore](https://github.com/booklore-app/booklore) | Self-hosted book server - destination for manga, webcomic and novels |
+
