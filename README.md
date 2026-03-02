@@ -73,6 +73,6 @@ Each mover script requires source and destination paths mounted into the contain
 
 | Repo | Description |
 |------|-------------|
-| [landing-page-simple](https://github.com/Treyzer567/landing-page-simple) | Frontend hub — includes a Script Runner UI for triggering movers manually |
+| [landing-page](https://github.com/Treyzer567/landing-page) | Frontend hub — includes a Script Runner UI for triggering movers manually |
 | [script-runner](https://github.com/Treyzer567/script-runner) | Backend API that the Script Runner UI talks to |
 | [manga-renamer](https://github.com/Treyzer567/manga-renamer) | Manga/Webtoons renaming script/backend |
