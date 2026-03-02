@@ -1,0 +1,180 @@
+version: "3.9"
+services:  
+  music-mover:
+    command: sh -c "apk add --no-cache bash && while true; do python3 /music-mover.py; sleep 3600; done"
+    container_name: music-mover
+    image: python:3.11-alpine
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+    restart: unless-stopped
+    networks:
+      - media-net
+    volumes:
+      - /path/to/scripts/music-mover.py:/music-mover.py:ro
+      - /path/to/music-source:/music-source:rw
+      - /path/to/music-destination:/music-destination:rw
+
+  comic-mover:
+    command: sh -c "apk add --no-cache bash && while true; do python3 /comic-mover.py; sleep 3600; done"
+    container_name: comic-mover
+    image: python:3.11-alpine
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+    restart: unless-stopped
+    networks:
+      - media-net
+    volumes:
+      - /path/to/scripts/comic-mover.py:/comic-mover.py:ro
+      - /path/to/comic-source:/comic-source:rw
+      - /path/to/comic-destination:/comic-destination:rw
+
+  manga-mover:
+    command: sh -c "apk add --no-cache bash && while true; do python3 /manga-mover.py; sleep 3600; done"
+    container_name: manga-mover
+    image: python:3.11-alpine
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+    restart: unless-stopped
+    networks:
+      - media-net
+    volumes:
+      - /path/to/scripts/manga-mover.py:/manga-mover.py:ro
+      - /path/to/manga-source:/manga-source:rw
+      - /path/to/manga-destination:/manga-destination:rw
+
+  webcomic-mover:
+    command: sh -c "apk add --no-cache bash && while true; do python3 /webcomic-mover.py; sleep 3600; done"
+    container_name: webcomic-mover
+    image: python:3.11-alpine
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+    restart: unless-stopped
+    networks:
+      - media-net
+    volumes:
+      - /path/to/scripts/webcomic-mover.py:/webcomic-mover.py:ro
+      - /path/to/webcomic-source:/webcomic-source:rw
+      - /path/to/webcomic-destination:/webcomic-destination:rw
+
+  novel-mover:
+    command: sh -c "apk add --no-cache bash && while true; do python3 /novel-mover.py; sleep 3600; done"
+    container_name: novel-mover
+    image: python:3.11-alpine
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+    restart: unless-stopped
+    networks:
+      - media-net
+    volumes:
+      - /path/to/scripts/novel-mover.py:/novel-mover.py:ro
+      - /path/to/novel-source:/novel-source:rw
+      - /path/to/novel-destination:/novel-destination:rw
+
+  movie-mover:
+    command: sh -c "apk add --no-cache bash && while true; do python3 /movie-mover.py; sleep 3600; done"
+    container_name: movie-mover
+    image: python:3.11-alpine
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+    restart: unless-stopped
+    networks:
+      - media-net
+    volumes:
+      - /path/to/scripts/movie-mover.py:/movie-mover.py:ro
+      - /path/to/movie-source:/movie-source:rw
+      - /path/to/movie-destination:/movie-destination:rw
+
+  musical-mover:
+    command: sh -c "apk add --no-cache bash && while true; do python3 /musical-mover.py; sleep 3600; done"
+    container_name: musical-mover
+    image: python:3.11-alpine
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+    restart: unless-stopped
+    networks:
+      - media-net
+    volumes:
+      - /path/to/scripts/musicals-mover.py:/musical-mover.py:ro
+      - /path/to/musical-source:/musical-source:rw
+      - /path/to/musical-destination:/musical-destination:rw
+
+  youtube-mover:
+    command: sh -c "apk add --no-cache bash && while true; do python3 /youtube-mover.py; sleep 3600; done"
+    container_name: youtube-mover
+    image: python:3.11-alpine
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+    restart: unless-stopped
+    networks:
+      - media-net
+    volumes:
+      - /path/to/scripts/youtube-mover.py:/youtube-mover.py:ro
+      - /path/to/youtube-source:/youtube-source:rw
+      - /path/to/youtube-destination:/youtube-destination:rw
+
+  show-mover:
+    command: >
+      sh -c "
+      apk add --no-cache bash &&
+      pip install --no-cache-dir requests &&
+      while true; do
+        python3 /show-mover.py;
+        sleep 3600;
+      done
+      "
+    container_name: show-mover
+    image: python:3.11-alpine
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+      - SONARR_URL=http://your-server-ip:8989
+      - SONARR_API_KEY=your_sonarr_api_key
+    restart: unless-stopped
+    networks:
+      - media-net
+    volumes:
+      - /path/to/scripts/show-mover.py:/show-mover.py
+      - /path/to/shows-source:/media-source:rw
+      - /path/to/anime-destination:/anime-destination:rw
+      - /path/to/tv-destination:/tv-destination:rw
+      - /path/to/kidstv-destination:/kidstv-destination:rw
+      - /path/to/scripts/show_map.json:/show_map.json:rw
+
+  anime-updater:
+    container_name: anime-updater
+    image: python:3.11-alpine
+    # Installs requests, then runs the script every hour (3600 seconds)
+    command: sh -c "pip install requests && while true; do python3 /scripts/anime_profile_updater.py; sleep 3600; done"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+      - SONARR_URL=http://your-server-ip:8989
+      - SONARR_API_KEY=your_sonarr_api_key
+    restart: unless-stopped
+    networks:
+      - media-net
+    volumes:
+      # Mount the folder containing both the .py script and the .json map
+      - /path/to/scripts:/scripts:rw
+    
+networks:
+ media-net:
+   external: true
