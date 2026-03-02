@@ -1,0 +1,21 @@
+version: "3.9"
+services:  
+  music-mover:
+    command: sh -c "apk add --no-cache bash && while true; do python3 /mover.py; sleep 86400; done"
+    container_name: music-mover
+    image: python:3.11-alpine
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+    restart: unless-stopped
+    networks:
+      - media-net
+    volumes:
+      - /home/dfzorin/Documents/scripts/mover.py:/mover.py:ro
+      - /home/dfzorin/Documents/shared/music:/music-source:rw
+      - /mnt/Additional/test/music:/music-destination:rw
+      
+networks:
+ media-net:
+   external: true
